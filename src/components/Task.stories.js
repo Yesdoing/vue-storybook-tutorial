@@ -7,7 +7,7 @@ export const task = {
   id: '1',
   title: 'Test Task',
   state: 'TASK_INBOX',
-  updatedAt: new Date(2018, 0, 1, 9, 0);
+  updatedAt: new Date(2018, 0, 1, 9, 0),
 };
 
 export const methods = {
@@ -15,7 +15,7 @@ export const methods = {
   onArchiveTask: action('onArchiveTask')
 };
 
-storiesOf('Task', modele)
+storiesOf('Task', module)
   .add('default', () => {
     return {
       components: { Task },
@@ -28,15 +28,15 @@ storiesOf('Task', modele)
     return {
       components: { Task },
       template: `<task :task="task" @archiveTask="onArchiveTask" @pinTask="onPinTask" />`,
-      data: () => ({...task, state: 'TASK_PINNED'}),
-      methods
+      data: () => ({task: {...task, state: 'TASK_PINNED'}}),
+      methods,
     };
   })
   .add('archived', () => {
     return {
       components: { Task },
-      template: `<task :task="task", @archiveTask="onArchiveTask" @pinTask="onPinTask" />`,
-      data: () => ({...task, state: 'TASK_ARCHIVE'}),
+      template: `<task :task="task" @archiveTask="onArchiveTask" @pinTask="onPinTask" />`,
+      data: () => ({task: {...task, state: 'TASK_ARCHIVED'}}),
       methods,
     };
-  })
+  });
